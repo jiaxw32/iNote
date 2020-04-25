@@ -16,7 +16,7 @@
 
 我的 > 游戏与互动
 
-<img src="./images/game/jd_宠汪汪.png" width="50%" height="50%" />
+<img src="./images/game/jd_游戏与互动.png" width="50%" height="50%" />
 
 #### 游戏技术实现
 
@@ -152,4 +152,4 @@ App 名称 | 游戏 | 实现技术
 淘宝 | 天猫农场、金币庄园 | H5
 微信 | 欢乐斗地主、腾讯桌球、欢乐麻将 | WAOpenGLView/EJJavaScriptView/EAGLView
 
-目前业界主流 App 中的小游戏主要使用 H5 实现，微信里边一些免下载的游戏没有使用 WKWebView，而是使用 OpenGL、EJJavaScriptView 实现，具体技术需要进一步研究。
+目前业界主流 App 中的小游戏主要使用 H5 实现，微信里边一些免下载的游戏没有使用 WKWebView，而是使用 `OpenGL`、`EJJavaScriptView` 实现，具体技术需要进一步研究。
