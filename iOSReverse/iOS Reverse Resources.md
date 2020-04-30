@@ -28,7 +28,7 @@
 
 * [iOS 逆向: 越狱使用 SSH](http://www.veryitman.com/2018/05/12/iOS-%E9%80%86%E5%90%91-%E8%B6%8A%E7%8B%B1%E4%BD%BF%E7%94%A8-SSH/)
 * [iOS10.2 SSH连接越狱设备](https://bingozb.github.io/21.html)
-* [scp 命令](http://www.runoob.com/linux/linux-comm-scp.html)
+* [scp 命令](http://www.runoob.com/linux/linux-comm-scp.html)
 
 ## 砸壳
 
@@ -38,7 +38,7 @@
 
 ### [dumpdecrypted](https://github.com/stefanesser/dumpdecrypted)
 
-* [iOS逆向使用dumpdecrypted给app砸壳](https://www.jianshu.com/p/14db1ac34bf1)
+* [iOS 逆向使用 dumpdecrypted 给 app 砸壳](https://www.jianshu.com/p/14db1ac34bf1)
 
 ### [frida-ios-dump](https://github.com/AloneMonkey/frida-ios-dump)
 
