@@ -4,14 +4,14 @@
 
 * [iOS 越狱大全](https://mp.weixin.qq.com/s?__biz=MjM5MjUxODExMQ==&mid=2652374040&idx=1&sn=b8ab60df42a929f217e902c21982771d&chksm=bd49bea88a3e37be53dcffd2246483ed6dc9393fa6d5467e89c37bd6d5e5e27cc2455c6e3499&mpshare=1&scene=23&srcid=1018AUdAEypHMTiZFCgbivw9%23rd)
 
-## 工具篇
+## 工具篇
 
 ### Mac 端工具
 
 * Hooper
 * IDA
 * Reveal
-* [MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)(快速上手，强烈推荐👍👍👍)
+* [MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)
 * MachOView
 
 ### 手机端工具
