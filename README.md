@@ -1,6 +1,6 @@
-# iNode
+# iNote
 
-个人学习研究笔记整理，以下文档可以通过 [iwiki](https://github.com/jiaxw32/iNote/wiki) 访问。
+个人学习研究笔记整理，支持 [wiki](https://github.com/jiaxw32/iNote/wiki) 访问。
 
 ## 目录
 
