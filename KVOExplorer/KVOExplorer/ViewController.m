@@ -93,7 +93,7 @@ static void printDescription(NSString *name, id obj){
     
     
     personAB.name = @"John"; //通过属性赋值，会触发 KVO
-    [personAB setValue:@"Jack" forKey:@"name"]; //使用 KVO 访问，也会触发 KVO
+    [personAB setValue:@"Jack" forKey:@"name"]; //使用 KVC 访问，也会触发 KVO
     
     [personAB setNickName:@"Air Jonh"]; //直接访问私有变量赋值, 不会触发 KVO
     [personAB setValue:@"Big Boss" forKey:@"_nickname"]; //使用 KVO，为私有变量赋值，会触发 KVO
