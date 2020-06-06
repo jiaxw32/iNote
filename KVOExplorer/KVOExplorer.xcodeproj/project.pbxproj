@@ -15,6 +15,7 @@
 		3778BC0124893F0800C76C2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3778BBFF24893F0800C76C2B /* LaunchScreen.storyboard */; };
 		3778BC0424893F0800C76C2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3778BC0324893F0800C76C2B /* main.m */; };
 		3778BC0F24893F6F00C76C2B /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3778BC0E24893F6F00C76C2B /* Person.m */; };
+		3783BA68248B9F4F00C0E870 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3783BA67248B9F4F00C0E870 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		3778BC0324893F0800C76C2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3778BC0D24893F6F00C76C2B /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3778BC0E24893F6F00C76C2B /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		3783BA66248B9F4F00C0E870 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		3783BA67248B9F4F00C0E870 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 				3778BC0324893F0800C76C2B /* main.m */,
 				3778BC0D24893F6F00C76C2B /* Person.h */,
 				3778BC0E24893F6F00C76C2B /* Person.m */,
+				3783BA66248B9F4F00C0E870 /* MainViewController.h */,
+				3783BA67248B9F4F00C0E870 /* MainViewController.m */,
 			);
 			path = KVOExplorer;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3778BBF924893F0300C76C2B /* ViewController.m in Sources */,
+				3783BA68248B9F4F00C0E870 /* MainViewController.m in Sources */,
 				3778BBF324893F0300C76C2B /* AppDelegate.m in Sources */,
 				3778BC0F24893F6F00C76C2B /* Person.m in Sources */,
 				3778BC0424893F0800C76C2B /* main.m in Sources */,
