@@ -42,6 +42,14 @@ static void printDescription(NSString *name, id obj){
 
 @interface ViewController ()
 
+@property (nonatomic,strong) Person *personA;
+
+@property (nonatomic,strong) Person *personB;
+
+@property (nonatomic,strong) Person *personAB;
+
+@property (nonatomic,strong) Person *person;
+
 @end
 
 @implementation ViewController
@@ -54,11 +62,19 @@ static void printDescription(NSString *name, id obj){
     Person *personB = [[Person alloc] init];
     Person *personAB = [[Person alloc] init];
     Person *person = [[Person alloc] init];
+    self.personA = personA;
+    self.personB = personB;
+    self.personAB = personAB;
+    self.person = person;
     
-    [personA addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
-    [personB addObserver:self forKeyPath:@"age" options:NSKeyValueObservingOptionNew context:NULL];
-    [personAB addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
-    [personAB addObserver:self forKeyPath:@"age" options:NSKeyValueObservingOptionNew context:NULL];
+    //观察对象弱引用 observer
+    [personA addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:nil];
+    [personB addObserver:self forKeyPath:@"age" options:NSKeyValueObservingOptionNew context:nil];
+    [personAB addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:nil];
+    [personAB addObserver:self forKeyPath:@"age" options:NSKeyValueObservingOptionNew context:nil];
+    
+    //为私有变量添加观察者
+    [personAB addObserver:self forKeyPath:@"_nickname" options:NSKeyValueObservingOptionNew context:nil];
     
     printDescription(@"person", person);
     printDescription(@"personA", personA);
@@ -76,22 +92,31 @@ static void printDescription(NSString *name, id obj){
                                    @selector(setName:))));
     
     
-    [personAB setName:@"John"];
-    [personAB setAge:30];
+    personAB.name = @"John"; //通过属性赋值，会触发 KVO
+    [personAB setValue:@"Jack" forKey:@"name"]; //使用 KVC 访问，也会触发 KVO
     
-    [personA removeObserver:self forKeyPath:@"name"];
-    [personB removeObserver:self forKeyPath:@"age"];
-    [personAB removeObserver:self forKeyPath:@"name"];
-    [personAB removeObserver:self forKeyPath:@"age"];
+    [personAB setNickName:@"Air Jonh"]; //直接访问私有变量赋值, 不会触发 KVO
+    [personAB setValue:@"Big Boss" forKey:@"_nickname"]; //使用 KVO，为私有变量赋值，会触发 KVO
 }
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    NSLog(@"%@", change);
+    NSLog(@"%s: %@", __func__, change);
 }
 
 
 - (void)dealloc {
+    NSLog(@"%s", __func__);
     
+    //不移除 KVO 不会崩溃，不会引起内存泄露
+//    [self.personA removeObserver:self forKeyPath:@"name"];
+    
+//   personA 没有为属性 age 注册 observer，移除时会触发崩溃：
+//    Cannot remove an observer <ViewController> for the key path "age" from <Person> because it is not registered as an observer. userInfo: (null)
+//    [self.personA removeObserver:self forKeyPath:@"age"];
+    
+    [self.personB removeObserver:self forKeyPath:@"age"];
+    [self.personAB removeObserver:self forKeyPath:@"name"];
+    [self.personAB removeObserver:self forKeyPath:@"age"];
 }
 @end
