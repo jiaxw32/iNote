@@ -120,3 +120,24 @@ static void printDescription(NSString *name, id obj){
     [self.personAB removeObserver:self forKeyPath:@"age"];
 }
 @end
+
+
+#import <Foundation/Foundation.h>
+
+@interface EOCBaseClass : NSObject
+@end
+
+@implementation EOCBaseClass
++ (void)initialize {
+    if (self == [EOCBaseClass class]) {
+        NSLog(@"%@ initialized", self);
+    }
+}
+@end
+
+
+@interface EOCSubClass : EOCBaseClass
+@end
+
+@implementation EOCSubClass
+@end
