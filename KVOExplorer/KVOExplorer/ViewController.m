@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import "Person.h"
 
+void testKVOAndAssocication(void);
 
 static NSArray *ClassMethodNames(Class c)
 {
@@ -97,6 +98,8 @@ static void printDescription(NSString *name, id obj){
     
     [personAB setNickName:@"Air Jonh"]; //直接访问私有变量赋值, 不会触发 KVO
     [personAB setValue:@"Big Boss" forKey:@"_nickname"]; //使用 KVO，为私有变量赋值，会触发 KVO
+    
+    testKVOAndAssocication();
 }
 
 
@@ -121,8 +124,7 @@ static void printDescription(NSString *name, id obj){
 }
 @end
 
-
-#import <Foundation/Foundation.h>
+#pragma mark -
 
 @interface EOCBaseClass : NSObject
 @end
@@ -141,3 +143,48 @@ static void printDescription(NSString *name, id obj){
 
 @implementation EOCSubClass
 @end
+
+# pragma mark - 关联对象与 KVO
+
+//NSObject+AssociatedObject.h
+@interface NSObject (AssociatedObject)
+@property (nonatomic, strong) id associatedObject;
+@end
+
+//NSObject+AssociatedObject.m
+@implementation NSObject (AssociatedObject)
+
+- (void)setAssociatedObject:(id)object {
+     objc_setAssociatedObject(self, @selector(associatedObject), object, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (id)associatedObject {
+    return objc_getAssociatedObject(self, @selector(associatedObject));
+}
+
+@end
+
+@interface Foo : NSObject
+
+@end
+
+@implementation Foo
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    NSLog(@"%@-%@", keyPath, change);
+}
+
+@end
+
+
+/// 测试关联对象，是否触发 KVO -> 结论：关联对象可以触发 KVO
+void testKVOAndAssocication(){
+    Foo *foo = [[Foo alloc] init];
+    
+    NSObject *obj = [NSObject new];
+    obj.associatedObject = @"old value";
+    
+    [obj addObserver:foo forKeyPath:@"associatedObject" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
+    obj.associatedObject = @"new value";
+}
