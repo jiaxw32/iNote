@@ -9,8 +9,8 @@
 
 /*
  Reference：
- * Playing with Mach-O binaries and dyld: https://blog.lse.epita.fr/2017/03/14/playing-with-mach-os-and-dyld.html
- * dyld source code：https://opensource.apple.com/source/dyld/
+ * [Playing with Mach-O binaries and dyld](https://blog.lse.epita.fr/2017/03/14/playing-with-mach-os-and-dyld.html)
+ * [dyld source code](https://opensource.apple.com/source/dyld/)
  */
 
 /// get dyld lib version
