@@ -1,0 +1,13 @@
+//
+//  LLVMConfig.xcconfig
+//  HelloLLVM
+//
+//  Created by jiaxw on 2021/11/3.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CC=$HOME/tools/llvm-home/bin/clang
+CXX=$HOME/tools/llvm-home/bin/clang
+COMPILER_INDEX_STORE_ENABLE=NO
