@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3709EDFA273278680057FFC2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3709EDF9273278680057FFC2 /* main.c */; };
+		3709EDFA273278680057FFC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EDF9273278680057FFC2 /* main.m */; };
+		3709EE0627327E6D0057FFC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3709EE0527327E6D0057FFC2 /* Foundation.framework */; };
+		3709EE0827327EA50057FFC2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3709EE0727327EA50057FFC2 /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,8 +26,10 @@
 
 /* Begin PBXFileReference section */
 		3709EDF6273278680057FFC2 /* HelloLLVM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloLLVM; sourceTree = BUILT_PRODUCTS_DIR; };
-		3709EDF9273278680057FFC2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		3709EDF9273278680057FFC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3709EE0027327A6D0057FFC2 /* LLVMConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LLVMConfig.xcconfig; sourceTree = "<group>"; };
+		3709EE0527327E6D0057FFC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3709EE0727327EA50057FFC2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3709EE0827327EA50057FFC2 /* CoreFoundation.framework in Frameworks */,
+				3709EE0627327E6D0057FFC2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,7 @@
 			children = (
 				3709EDF8273278680057FFC2 /* HelloLLVM */,
 				3709EDF7273278680057FFC2 /* Products */,
+				3709EE0427327E6D0057FFC2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +65,19 @@
 		3709EDF8273278680057FFC2 /* HelloLLVM */ = {
 			isa = PBXGroup;
 			children = (
-				3709EDF9273278680057FFC2 /* main.c */,
+				3709EDF9273278680057FFC2 /* main.m */,
 				3709EE0027327A6D0057FFC2 /* LLVMConfig.xcconfig */,
 			);
 			path = HelloLLVM;
+			sourceTree = "<group>";
+		};
+		3709EE0427327E6D0057FFC2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3709EE0727327EA50057FFC2 /* CoreFoundation.framework */,
+				3709EE0527327E6D0057FFC2 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3709EDFA273278680057FFC2 /* main.c in Sources */,
+				3709EDFA273278680057FFC2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 //
 
 #include <stdio.h>
+#import <Foundation/Foundation.h>
 
 /*
  -Xclang -load -Xclang libSkeletonPass.so
@@ -25,21 +26,28 @@
  -enable-fco Enable FunctionCallObfuscate. (See HERE for full usage)
  
  -mllvm -enable-allobf
+ -mllvm -enable-bcfobf
  -mllvm -enable-indibran -mllvm -enable-strcry
  -mllvm -enable-indibran -mllvm split_num=2
  
  bcf, fla, fco, fw, indibr, split, strenc, sub
  */
 
+int sum(int a, int b);
+int multiply(int a, int b);
+void swap(int *a, int *b);
+int max(int a, int b) __attribute__((annotate("sub,indibr")));
+int main(void) __attribute__((annotate("strenc,indibr")));
+
 int sum(int a, int b) {
     return a + b;
 }
 
-int multiply(int a, int b) __attribute__((annotate("strenc,indibr"))) {
+int multiply(int a, int b) {
     return a * b;
 }
 
-void swap(int *a, int *b) __attribute__((annotate("strenc,indibr"))){
+void swap(int *a, int *b){
     int temp;
     temp = *a;
     *a = *b;
@@ -50,8 +58,40 @@ int max(int a, int b){
     return a >= b ? a : b;
 }
 
+#pragma mark - MYClass
 
-int main(int argc, const char * argv[]) {
+@interface MYClass : NSObject
+
+@end
+
+@implementation MYClass
+
+extern void hikari_strenc(void);
+extern void hikari_nostrenc(void);
+
+extern void hikari_bcf(void);
+extern void hikari_nobcf(void);
+
+extern void hikari_indibr(void);
+extern void hikari_nodibr(void);
+
+- (void)foo{
+    hikari_nobcf();
+    NSLog(@"call method: %s", __func__);
+}
+
+- (void)bar{
+    hikari_strenc();
+    hikari_indibr();
+    NSLog(@"call method: %s", __func__);
+}
+
+@end
+
+
+#pragma mark - main
+
+int main() {
     // insert code here...
     printf("Hello, World!\n");
     
