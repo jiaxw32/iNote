@@ -4,5 +4,6 @@
         <page name='StringPage'/>
         <page name='DictionaryPage'/>
         <page name='MainPage'/>
+        <page name='TuplePage'/>
     </pages>
 </playground>
