@@ -11,6 +11,8 @@ import Foundation
 //: ## 初始化 Tuple
 
 //: - 省略标签
+
+// 元组中的元素数据类型可以不同
 let tuple0 = ("John", 35, true)
 print(type(of: tuple0))
 print(tuple0)
@@ -28,6 +30,10 @@ print(element0)
 //: - 使用标签访问元素
 let element1 = tuple1.age
 print(element1)
+
+//: - 分解元素，使用下划线(_)可以忽略元素
+let (element_0, element_1, _) = tuple0
+print(element_0, element_1)
 
 //: ## 修改元组元素
 
