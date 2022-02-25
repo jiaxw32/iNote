@@ -7,5 +7,6 @@
         <page name='TuplePage'/>
         <page name='ArrayPage'/>
         <page name='MemoryLayoutPage'/>
+        <page name='UnsafePointerPage'/>
     </pages>
 </playground>
