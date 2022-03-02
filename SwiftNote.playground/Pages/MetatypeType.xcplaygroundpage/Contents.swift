@@ -5,7 +5,9 @@ import Foundation
 /*
  func type<T, Metatype>(of value: T) -> Metatype
  
- ref: https://developer.apple.com/documentation/swift/2885064-type
+ references:
+ 1. https://developer.apple.com/documentation/swift/2885064-type
+ 2. https://swiftgg.gitbook.io/swift/yu-yan-can-kao/03_types#self-type
  */
 
 //: ## Example1
