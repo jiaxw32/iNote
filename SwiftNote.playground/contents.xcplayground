@@ -9,5 +9,6 @@
         <page name='MemoryLayoutPage'/>
         <page name='UnsafePointerPage'/>
         <page name='MetatypeType'/>
+        <page name='SetPage'/>
     </pages>
 </playground>
