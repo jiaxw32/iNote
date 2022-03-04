@@ -141,7 +141,6 @@ print("stride:\t\t\t \(MemoryLayout<AnotherPuppyClass>.stride)") // 8
 print("alignment:\t\t \(MemoryLayout<AnotherPuppyClass>.alignment)") // 8
 print("instance size:\t \(class_getInstanceSize(AnotherPuppyClass.self))") // 32
 
-
 class ClassA {
     var x: Int = 0xff // 8
     var y: Bool = true // 1
@@ -157,8 +156,7 @@ do {
     let ptr = UnsafeRawPointer(bitPattern: unsafeBitCast(exmaple, to: UInt.self))
     size = malloc_size(ptr)
     print("malloc size: ", size) // 48
-    
-    print("memory content:", terminator: " ")
+    print("memory content: ", terminator: "")
     dumpMemory(of: ptr!, size: size)
 }
 
@@ -177,15 +175,14 @@ do {
     let ptr = UnsafeRawPointer(bitPattern: unsafeBitCast(exmaple, to: UInt.self))
     size = malloc_size(ptr)
     print("malloc size: ", size) // 48
-    
-    print("memory content:", terminator: " ")
+    print("memory content: ", terminator: "")
     dumpMemory(of: ptr!, size: size)
 }
 
 
 class ClassC {
-    var x: Bool = true // 1
-    var y: Int = 0xff // 8
+    var x: Bool = true  // 8
+    var y: Int = 0xff // 1
     var z: Bool = true // 1
     var a: Bool = true // 1
     var b: Bool = true // 1
@@ -204,21 +201,9 @@ do {
     let ptr = UnsafeRawPointer(bitPattern: unsafeBitCast(exmaple, to: UInt.self))
     size = malloc_size(ptr)
     print("malloc size: ", size) // 48
-    
-    print("memory content:", terminator: " ")
+    print("memory content: ", terminator: "")
     dumpMemory(of: ptr!, size: size)
 }
 
-autoreleasepool {
-    var arr: [ClassC] = []
-    var ptrArr: [UnsafeRawPointer] = []
-    for _ in 0..<100 {
-        let exmaple = ClassC()
-        arr.append(exmaple)
-        let ptr = UnsafeRawPointer(bitPattern: unsafeBitCast(exmaple, to: UInt.self))
-        ptrArr.append(ptr!)
-    }
-    print(ptrArr.sorted(by: <))
-}
 
 //: [Next](@next)

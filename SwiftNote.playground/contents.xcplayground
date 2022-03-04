@@ -6,8 +6,6 @@
         <page name='MainPage'/>
         <page name='TuplePage'/>
         <page name='ArrayPage'/>
-        <page name='MemoryLayoutPage'/>
-        <page name='UnsafePointerPage'/>
         <page name='MetatypeType'/>
         <page name='SetPage'/>
     </pages>
