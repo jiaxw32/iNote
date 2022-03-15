@@ -8,5 +8,8 @@
         <page name='ArrayPage'/>
         <page name='MetatypeType'/>
         <page name='SetPage'/>
+        <page name='MemoryLayoutPage'/>
+        <page name='UnsafePointerPage'/>
+        <page name='KVOPage'/>
     </pages>
 </playground>
