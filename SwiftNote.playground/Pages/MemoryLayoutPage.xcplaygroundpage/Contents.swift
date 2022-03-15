@@ -221,4 +221,29 @@ autoreleasepool {
     print(ptrArr.sorted(by: <))
 }
 
+class ClassD {
+    var x: Int = 0xff // 8
+    var y: Bool = true // 1
+    
+    func foo() -> Void {
+        print("foo")
+    }
+}
+
+do {
+    print("======== \(String(describing: ClassD.self)) ========")
+    var size = class_getInstanceSize(ClassD.self)
+    print("instance size: ", size) // 40
+
+    let exmaple = ClassD()
+    let ptr = UnsafeRawPointer(bitPattern: unsafeBitCast(exmaple, to: UInt.self))
+    size = malloc_size(ptr)
+    print("malloc size: ", size) // 48
+    
+    print("memory content:", terminator: " ")
+    dumpMemory(of: ptr!, size: size)
+}
+
+
+
 //: [Next](@next)
