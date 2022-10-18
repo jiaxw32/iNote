@@ -145,7 +145,6 @@
 /* Begin XCBuildConfiguration section */
 		3709EDFB273278680057FFC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3709EE0027327A6D0057FFC2 /* LLVMConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -205,7 +204,6 @@
 		};
 		3709EDFC273278680057FFC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3709EE0027327A6D0057FFC2 /* LLVMConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
