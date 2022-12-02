@@ -58,3 +58,6 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+# custom
+HelloLLVM/HelloLLVM.xcodeproj/xcshareddata/
