@@ -203,3 +203,18 @@ class SubClass: MyClass {
     override func extensionMethod() {}
 }
 */
+
+
+struct Password {
+    var text: String
+    init?(input: String) {
+        if input.count < 6 {
+            print("Password too short.")
+            return nil
+        }
+        text = input
+    }
+}
+let password = Password(input: "hell0")
+
+type(of: password)

@@ -17,6 +17,7 @@
 #include "zlog.h"
 #include <sys/time.h>
 #import <sys/sysctl.h>
+#include <errno.h>
 
 void identify_function_ptr( void *ptr)  {
     Dl_info info;
@@ -126,6 +127,23 @@ int test_vm_region(void){
     return 0;
 }
 
+static int is_debugger_present(void){
+    struct kinfo_proc info;
+    size_t info_size = sizeof(info);
+    info.kp_proc.p_flag = 0;
+
+    int name[4];
+    name[0] = CTL_KERN;
+    name[1] = KERN_PROC;
+    name[2] = KERN_PROC_PID;
+    name[3] = getpid();
+    
+    if(sysctl(name, sizeof(name)/sizeof(*name), &info, &info_size, NULL, 0) != 0) {
+        printf("sysctl: %s", strerror(errno));
+        return 0;
+    }
+    return ((info.kp_proc.p_flag & P_TRACED) != 0);
+}
 
 static void sysctl_example_1(){
     int name[2] = {CTL_HW, HW_USERMEM};
@@ -148,7 +166,7 @@ static void sysctl_example_2(){
 static void sysctl_example_3(){
     size_t len;
     int mib[] = {CTL_KERN, KERN_OSRELEASE};
-    sysctl(mib, sizeof mib / sizeof(int), NULL, &len, NULL, 0);
+    sysctl(mib, sizeof mib / sizeof(*mib), NULL, &len, NULL, 0);
 
     char *kernelVersion = (char *)malloc(sizeof(char)*len);
     sysctl(mib, sizeof mib / sizeof(int), kernelVersion, &len, NULL, 0);
@@ -169,8 +187,21 @@ static void sysctl_example_4(){
     printf("cpu number: %d\n", numcpu);
 }
 
+static void cpu_number_example(){
+    int mib[2] = {CTL_HW, HW_NCPU};
+    int numcpu = 0;
+    size_t numcpu_size;
+
+    sysctl (mib, sizeof(mib) / sizeof(int), &numcpu, &numcpu_size, NULL, 0);
+    printf("cpu number: %d\n", numcpu);
+}
+
 int main(int argc, const char * argv[]) {    
     printf("size of uuid_t: %ld\n", sizeof(uuid_t));
+    
+    int flag = is_debugger_present();
+    printf("status: %d", flag);
+    
     
     
     sysctl_example_1();
@@ -180,6 +211,8 @@ int main(int argc, const char * argv[]) {
     sysctl_example_3();
     
     sysctl_example_4();
+    
+    cpu_number_example();
     
     const char *dir = getenv("HOME");
     if (strlen(dir) > 8) {  // /private
