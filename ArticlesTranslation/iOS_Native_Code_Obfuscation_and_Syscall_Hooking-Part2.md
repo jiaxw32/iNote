@@ -1,18 +1,18 @@
-# Part 2 – iOS Native Code Obfuscation and Syscall Hooking | 第二部分 - iOS本地代码混淆和系统调用挂钩
+# Part 2 – iOS Native Code Obfuscation and Syscall Hooking | 第二部分 - iOS原生代码混淆和系统调用挂钩
 
 ![](https://www.romainthomas.fr/post/22-09-ios-obfuscation-syscall-hooking/featured.png)
 
 > The first part is here: [Part 1 – SingPass RASP Analysis][]
 
-After SingPass, I had a look at another application protected with the same obfuscator but with enhanced protections.
+After `SingPass`, I had a look at another application protected with the same obfuscator but with enhanced protections.
 
-在研究了SingPass之后，我又看了一个使用相同混淆器但加强保护的应用程序。
+在研究了SingPass之后，我又看了一个使用相同混淆器但增强保护的应用程序。
 
 Compared to the previous application, this new application crashes immediately as soon as it is launched.
 
-与之前的应用程序相比，这个新应用程序一启动就立即崩溃。
+与之前的应用程序相比，这个新应用程序启动就立即崩溃。
 
-By checking the crash log, we don’t get any meaningful information since the obfuscator trashes some registers like LR before crashing. By trashing LR, the iOS crash analytics service is not able to correctly build the call stack of the functions that led to the crash.
+By checking the crash log, we don’t get any meaningful information since the obfuscator **trashes** some registers like LR before crashing. By trashing LR, the iOS crash analytics service is not able to correctly build the call stack of the functions that led to the crash.
 
 通过检查崩溃日志，我们无法获得任何有意义的信息，因为混淆器会在崩溃前破坏一些寄存器（如LR）。通过破坏LR，iOS崩溃分析服务无法正确构建导致崩溃的函数调用堆栈。
 
@@ -37,27 +37,27 @@ ImageLoader::containsAddress(0x104633f50): KaaSBle!bbf50
 ---> CRASH!
 ```
 
-So the application crashes when loading the KaaSBle library embedded as a third-party framework of the application.
+So the application crashes when loading the `KaaSBle` library embedded as a third-party framework of the application.
 
-当将KaaSBle库作为第三方框架嵌入应用程序时，应用程序会崩溃。
+当将 KaaSBle 库作为第三方框架嵌入应用程序时，加载该库时应用程序会崩溃。
 
-Compared SingPass, the library does not leak symbols about the RASP checks nor about the obfuscator. In addition, some functions are obfuscated with control-flow flattening and Mixed Boolean-Arithmetic (MBA) expressions as we can observe in the following figure:
+Compared `SingPass`, the library does not leak symbols about the RASP checks nor about the obfuscator. In addition, some functions are obfuscated with control-flow flattening and Mixed Boolean-Arithmetic (MBA) expressions as we can observe in the following figure:
 
-与SingPass相比，该库不会泄漏有关RASP检查或混淆器的符号。此外，一些函数使用控制流平坦化和混合布尔算术（MBA）表达式进行了混淆，如下图所示：
+与SingPass相比，该库不会泄漏有关 RASP 检查或混淆器的符号。此外，一些函数使用控制流平坦化和混合布尔算术（MBA）表达式进行了混淆，如下图所示：
 
 ![](https://www.romainthomas.fr/post/22-09-ios-obfuscation-syscall-hooking/imgs/cfg_flat_macho_ctor.webp "Figure 1 - Control-Flow Flattening in the Constructor of KaaSBle")
 
-Based on the previous analysis of SingPass, we know that RASP checks related to jailbreak or debugger detection use uncommon functions like getpid, unmount or pathconf. It turns out that, these functions are also imported by KaaSBle which enables to identify where some of the RASP checks are located.
+Based on the previous analysis of `SingPass`, we know that RASP checks related to jailbreak or debugger detection use uncommon functions like getpid, unmount or pathconf. It turns out that, these functions are also imported by KaaSBle which enables to identify where some of the RASP checks are located.
 
-根据之前对SingPass的分析，我们知道RASP检查与越狱或调试器检测相关的使用了像getpid、unmount或pathconf这样不常见的函数。结果发现，这些函数也被KaaSBle导入，从而能够确定一些RASP检查所在的位置。
+根据之前对 SingPass 的分析，我们知道 RASP 检查与越狱或调试器检测相关的使用了像 getpid、unmount 或 pathconf 这样不常见的函数。结果发现，这些函数也被 KaaSBle 导入，从而能够确定一些 RASP 检查所在的位置。
 
 >   Uncommon imported functions like unmount are usually a good signature to identify potential RASP checks
 > 
-> 不常见的导入函数，比如unmount，通常是识别潜在RASP检查的良好标志
+> 不常见的导入函数，比如 unmount，通常是识别潜在 RASP 检查的良好标志
 
 For instance, the function `sub_EBDC` which uses `getpid` is likely involved in the debugger detection. This function is obfuscated with an MBA and control-flow flattening and, its graph is represented in Figure 2[^1]
 
-例如，使用getpid的函数sub_EBDC可能涉及调试器检测。该函数采用MBA和控制流平坦化进行混淆，并在图2中表示其图形。
+例如，使用 getpid 的函数 `sub_EBDC` 可能涉及调试器检测。该函数采用MBA和控制流平坦化进行混淆，它的控制流图形在图2中表示。
 
 ![](https://raw.githubusercontent.com/jiaxw32/iNote/master/images/blog/iOS-Obfuscation/Fig02-BinaryNinja_HLIL_Graph_of_sub_EBDC.png "Figure 2 - BinaryNinja HLIL Graph of sub_EBDC")
 
